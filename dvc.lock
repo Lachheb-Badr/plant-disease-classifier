@@ -1,0 +1,25 @@
+schema: '2.0'
+stages:
+  preprocess:
+    cmd: python -m src.data.preprocess --config configs/config.yaml
+    deps:
+    - path: data/raw
+      hash: md5
+      md5: 374017e996c538dec2c2fefae25ffcc6.dir
+      size: 1353240862
+      nfiles: 1532
+    - path: src/data/preprocess.py
+      hash: md5
+      md5: 94222f7a3c0130660f84a0f370425f8a
+      size: 2334
+    params:
+      configs/config.yaml:
+        data.preprocess_size:
+        - 341
+        - 512
+    outs:
+    - path: data/processed
+      hash: md5
+      md5: 2ea6a07710a5d62cbf4fde9503525f32.dir
+      size: 95874958
+      nfiles: 1532

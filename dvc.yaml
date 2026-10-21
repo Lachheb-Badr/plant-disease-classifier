@@ -1,0 +1,12 @@
+stages:
+  preprocess:
+    desc: Downscale the raw photos (~4000x2700) to the stored size used for training
+    cmd: python -m src.data.preprocess --config configs/config.yaml
+    deps:
+      - data/raw
+      - src/data/preprocess.py
+    params:
+      - configs/config.yaml:
+          - data.preprocess_size
+    outs:
+      - data/processed
