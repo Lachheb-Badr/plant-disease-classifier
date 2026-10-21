@@ -5,28 +5,36 @@ project:
 data:
   raw_dir: data/raw
   processed_dir: data/processed
+  splits:
+    train: Train
+    val: Validation
+    test: Test
   classes:
     - Healthy
     - Powdery
     - Rust
   num_classes: 3
-  image_size: 224          # Input size for pretrained models (224x224)
+  # Sizes are (height, width). Raw images are ~4000x2700 (ratio 3:2).
+  preprocess_size: [341, 512]   # one-time downscale stored in data/processed
+  image_size: [224, 336]        # model input size (keeps the 3:2 ratio)
 
 transforms:
   normalize_mean: [0.485, 0.456, 0.406]   # ImageNet mean
   normalize_std: [0.229, 0.224, 0.225]    # ImageNet std
   augmentation:
+    random_resized_crop_scale: [0.6, 1.0]
     random_horizontal_flip: true
     random_vertical_flip: false
     random_rotation: 15
     color_jitter:
-      brightness: 0.2
+      brightness: 0.3     # raised: brightness differs between classes
       contrast: 0.2
       saturation: 0.2
+      hue: 0.0            # no hue shift: color is a real disease signal
 
 dataloader:
   batch_size: 32
-  num_workers: 4
+  num_workers: 1            # 2-core CPU: data loading is cheap, leave cores to the model
   pin_memory: true
 
 training:
@@ -41,12 +49,13 @@ training:
     min_delta: 0.001
 
 model:
-  name: custom_cnn          # custom_cnn | efficientnet_b0 | resnet50
+  name: custom_cnn          # custom_cnn | mobilenet_v3_small | efficientnet_b0 | resnet50
   pretrained: false         # true only for pretrained models
+  unfreeze_blocks: null     # pretrained models: null = train all, 0 = head only, N = head + last N blocks
   dropout: 0.3
 
 mlflow:
-  tracking_uri: http://localhost:5000
+  tracking_uri: sqlite:///mlflow.db   # overridden by the MLFLOW_TRACKING_URI env var
   experiment_name: plant-disease-classification
 
 paths:

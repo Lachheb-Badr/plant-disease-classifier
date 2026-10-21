@@ -1,0 +1,9 @@
+# Dependencies of the API image only (torch and torchvision are installed
+# separately in the Dockerfile, as the small CPU-only build).
+fastapi>=0.110.0
+uvicorn>=0.29.0
+python-multipart>=0.0.9
+pydantic>=2.6.0
+pyyaml>=6.0.1
+numpy>=1.26.0
+pillow>=10.2.0

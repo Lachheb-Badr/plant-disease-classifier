@@ -3,7 +3,7 @@ torch>=2.2.0
 torchvision>=0.17.0
 
 # Experiment Tracking
-mlflow>=2.11.0
+mlflow>=3.0.0
 
 # API
 fastapi>=0.110.0
@@ -15,7 +15,9 @@ pydantic>=2.6.0
 pydantic-settings>=2.2.0
 pyyaml>=6.0.1
 numpy>=1.26.0
+pandas>=2.2.0
 pillow>=10.2.0
+tqdm>=4.66.0
 
 # Evaluation & Visualization
 scikit-learn>=1.4.0

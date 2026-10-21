@@ -57,3 +57,23 @@ Thumbs.db
 .pytest_cache/
 .coverage
 htmlcov/
+
+# MLflow local database and its backups (mlflow.db.bak, ...)
+mlflow.db*
+
+# Data is tracked by DVC (`dvc add` writes its own data/.gitignore).
+# Safety net so raw image files can never be committed by accident:
+data/**/*.jpg
+data/**/*.jpeg
+data/**/*.png
+data/**/*.JPG
+data/**/*.JPEG
+data/**/*.PNG
+
+# Archives (processed.zip / code.zip prepared for Colab)
+*.zip
+
+# Coverage and OS extras
+coverage.xml
+.coverage.*
+desktop.ini

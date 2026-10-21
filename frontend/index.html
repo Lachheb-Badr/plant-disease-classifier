@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LeafScan · Plant disease detection</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <div class="logo"><i>🌿</i>LeafScan</div>
+    <div class="pill" role="status"><span class="dot" id="dot"></span><span id="status">Connecting…</span></div>
+  </nav>
+  <header>
+    <h1>Spot plant disease<br><span>in seconds</span></h1>
+    <p>Upload a photo of a leaf and a deep-learning model will tell you whether it looks healthy or shows signs of powdery mildew or rust.</p>
+    <div class="chips"><b>🍃 Healthy</b><b>❄️ Powdery mildew</b><b>🍂 Rust</b></div>
+  </header>
+  <main>
+    <section class="card" aria-label="Upload">
+      <button class="drop" id="drop" type="button" aria-label="Choose or drop a leaf photo">
+        <img id="preview" alt="Selected leaf">
+        <div id="hint">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4m0 0 4 4m-4-4L8 8"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>
+          <div><strong>Drop a leaf photo here</strong></div>
+          <small>or click to browse · JPG, PNG</small>
+        </div>
+      </button>
+      <input type="file" id="file" accept="image/*" hidden>
+      <button class="go" id="go" disabled>Analyze leaf</button>
+      <button class="link" id="reset" hidden>Choose another photo</button>
+    </section>
+    <section class="card" aria-live="polite" id="out">
+      <div class="empty"><div>🔬</div><p>Your analysis will appear here.</p></div>
+    </section>
+  </main>
+  <footer>An AI prediction, not a diagnosis. Confirm with an agronomist before treating your plants.<br>Model: EfficientNet-B0 fine-tuned on leaf photos · served with FastAPI</footer>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-.PHONY: help install train evaluate api mlflow docker-build docker-up docker-down test dvc-push clean
+.PHONY: help install preprocess train evaluate api mlflow docker-build docker-up docker-down test dvc-push clean
 
 # Default target
 help:
@@ -6,8 +6,9 @@ help:
 	@echo "🌿 Plant Disease Classifier - Available Commands"
 	@echo "================================================"
 	@echo "  make install        Install dependencies"
+	@echo "  make preprocess     Downscale raw images into data/processed"
 	@echo "  make train          Run training pipeline"
-	@echo "  make evaluate       Run evaluation on test set"
+	@echo "  make evaluate       Evaluate a checkpoint (make evaluate CKPT=checkpoints/x.pt)"
 	@echo "  make api            Start FastAPI server"
 	@echo "  make mlflow         Start MLflow tracking server"
 	@echo "  make docker-build   Build Docker image"
@@ -21,11 +22,14 @@ help:
 install:
 	pip install -r requirements.txt
 
+preprocess:
+	python -m src.data.preprocess --config configs/config.yaml
+
 train:
-	python src/training/train.py --config configs/config.yaml
+	python -m src.training.train --config configs/config.yaml $(ARGS)
 
 evaluate:
-	python src/evaluation/evaluate.py --config configs/config.yaml
+	python -m src.evaluation.evaluate --checkpoint $(CKPT) $(ARGS)
 
 api:
 	uvicorn src.api.main:app --host 0.0.0.0 --port 8000 --reload

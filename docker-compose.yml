@@ -1,0 +1,24 @@
+services:
+  api:
+    build: .
+    image: plant-disease-classifier
+    ports:
+      - "8000:8000"
+    environment:
+      MODEL_CHECKPOINT: ${MODEL_CHECKPOINT:-checkpoints/efficientnet_b0_pretrained_last3.pt}
+    volumes:
+      - ./checkpoints:/app/checkpoints:ro
+    restart: unless-stopped
+
+  mlflow:
+    build:
+      context: .
+      dockerfile: Dockerfile.mlflow
+    ports:
+      - "5000:5000"
+    volumes:
+      - mlflow_data:/mlflow
+    restart: unless-stopped
+
+volumes:
+  mlflow_data:
