@@ -1,6 +1,6 @@
 # LeafScan - Plant Disease Classifier
 
-[![CI](https://github.com/<your-username>/plant-disease-classifier/actions/workflows/ci.yml/badge.svg)](https://github.com/<your-username>/plant-disease-classifier/actions/workflows/ci.yml)
+[![CI](https://github.com/Lachheb-Badr/plant-disease-classifier/actions/workflows/ci.yml/badge.svg)](https://github.com/Lachheb-Badr/plant-disease-classifier/actions/workflows/ci.yml)
 
 ![Python](https://img.shields.io/badge/Python-3.12+-3776AB?logo=python&logoColor=white)
 ![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?logo=pytorch&logoColor=white)
