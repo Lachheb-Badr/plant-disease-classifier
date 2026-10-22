@@ -76,4 +76,4 @@ data/**/*.PNG
 # Coverage and OS extras
 coverage.xml
 .coverage.*
-desktop.ini
+desktop.ini.dvc/config
